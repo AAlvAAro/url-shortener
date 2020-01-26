@@ -5,7 +5,16 @@ class UrlsController < ApplicationController
   end
 
   def show
-    @url = Url.find_by(slug: url_params[:slug])
+    url = Url.find_by(slug: params[:id])
+
+    if url.present?
+      url.increment!(:visits)
+
+      redirect_to url.original
+    else
+      flash[:alert] = 'Sorry! The url you provided does not exist in our records'
+      redirect_to root_path
+    end
   end
 
   def create
@@ -21,6 +30,6 @@ class UrlsController < ApplicationController
   private
 
   def url_params
-    params.require(:url).permit(:original, :slug)
+    params.require(:url).permit(:original)
   end
 end
