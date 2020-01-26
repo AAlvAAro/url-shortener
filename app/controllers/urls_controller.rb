@@ -1,7 +1,7 @@
 class UrlsController < ApplicationController
-  before_action :get_urls
-
-  def index; end
+  def index
+    @urls = Url.order(visits: :desc).limit(100)
+  end
 
   def show
     @url = Url.find_by(short: url_params[:short])
@@ -22,9 +22,5 @@ class UrlsController < ApplicationController
 
   def url_params
     params.require(:url).permit(:original, :short)
-  end
-
-  def get_urls
-    @urls = Url.last(100)
   end
 end
