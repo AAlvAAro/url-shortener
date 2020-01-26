@@ -24,7 +24,7 @@ class UrlsController < ApplicationController
     UrlInspectorJob.perform_now(url.slug)
 
     flash[:notice] = 'Your shortened URL has been created'
-    redirect_to urls_path(slug: url.slug)
+    redirect_to root_path(slug: url.slug)
   end
 
   private
