@@ -9,18 +9,19 @@
     %p Your shortened url is:
     %b= full_url(@slug)
 
-%h3 Our most visited URLs are:
+- if @urls.any?
+  %h3 Our most visited URLs are:
 
-%table
-  %tr
-    %th Page
-    %th Original URL
-    %th Short URL
-    %th Visits
-  - @urls.each do |url|
+  %table
     %tr
-      %th= url.title
-      %th= url.original
-      %th= full_url(url.slug)
-      %th= url.visits
+      %th Page
+      %th Original URL
+      %th Short URL
+      %th Visits
+    - @urls.each do |url|
+      %tr
+        %th= url.title
+        %th= url.original
+        %th= full_url(url.slug)
+        %th= url.visits
 

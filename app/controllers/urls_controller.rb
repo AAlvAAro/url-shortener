@@ -18,11 +18,10 @@ class UrlsController < ApplicationController
   end
 
   def create
-    url = Url.find_or_create_by(original: url_params[:original]) do |url|
-      url.slug = 'abcde'
-    end
+    url = Url.find_or_create_by(original: url_params[:original])
+    generate_slug(url) unless url.slug.present?
 
-    UrlInspectorJob.perform_later(url.slug)
+    UrlInspectorJob.perform_now(url.slug)
 
     flash[:notice] = 'Your shortened URL has been created'
     redirect_to urls_path(slug: url.slug)
@@ -32,5 +31,11 @@ class UrlsController < ApplicationController
 
   def url_params
     params.require(:url).permit(:original)
+  end
+
+  def generate_slug(url)
+    slug = url.id.to_s(36)
+
+    url.update(slug: slug)
   end
 end
