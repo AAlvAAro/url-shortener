@@ -1,3 +1,3 @@
 class Url < ApplicationRecord
-  validates_presence_of :original, :short, :title
+  validates_presence_of :original, :slug, :title
 end

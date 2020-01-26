@@ -1,26 +1,26 @@
 class UrlsController < ApplicationController
   def index
     @urls = Url.order(visits: :desc).limit(100)
+    @slug = params[:slug]
   end
 
   def show
-    @url = Url.find_by(short: url_params[:short])
+    @url = Url.find_by(slug: url_params[:slug])
   end
 
   def create
     url = Url.find_or_create_by(original: url_params[:original]) do |url|
-      url.short = 'abcde'
+      url.slug = 'abcde'
       url.title = 'Google'
     end
 
-    @slug = url.short
-
-    render :index, notice: 'Your shortened URL has been created'
+    flash[:notice] = 'Your shortened URL has been created'
+    redirect_to urls_path(slug: url.slug)
   end
 
   private
 
   def url_params
-    params.require(:url).permit(:original, :short)
+    params.require(:url).permit(:original, :slug)
   end
 end

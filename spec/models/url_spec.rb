@@ -4,7 +4,7 @@ RSpec.describe Url, type: :model do
   let(:url) { create(:url) }
 
   describe 'validations' do
-    %i(original short title).each do |attr|
+    %i(original slug title).each do |attr|
       it { should validate_presence_of(attr) }
     end
 

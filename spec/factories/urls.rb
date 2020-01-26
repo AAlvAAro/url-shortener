@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :url do
     original { "http://google.com" }
-    short { "abcdefg" }
+    slug { "abcdefg" }
     title { "Google" }
     visits { 0 }
   end
