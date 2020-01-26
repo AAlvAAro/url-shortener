@@ -1,5 +1,4 @@
 require 'rails_helper'
-
 RSpec.describe UrlsController, type: :controller do
   let(:url) { create(:url) }
 
@@ -24,9 +23,12 @@ RSpec.describe UrlsController, type: :controller do
   end
 
   describe 'POST #create' do
-    xit 'returns http success' do
+    before { allow_any_instance_of(UrlInspectorJob).to receive(:perform) { true } }
+
+    it 'returns http success' do
       post :create, params: { url: { original: 'http://google.com' } }
-      expect(response).to have_http_status(:success)
+
+      expect(flash[:notice]).to eq('Your shortened URL has been created')
     end
   end
 end
