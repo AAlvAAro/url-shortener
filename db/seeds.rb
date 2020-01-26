@@ -2,7 +2,7 @@ require 'faker'
 
 puts 'Generating urls'
 
-120.times do |i|
+90.times do |i|
   Url.create(
     original: Faker::Internet.url,
     slug: i.to_s(36),
