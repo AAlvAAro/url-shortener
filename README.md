@@ -1,27 +1,14 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Edit/Remove the following sections as you wish.
-
-## System Requirements
-
-- Ruby 2.x.x
-- Rails 5.2.2
-- Yarn
-
 ## Dependencies
 
-### Ruby
+- Ruby 2.5.7
+- Rails 6.0.0
+- Yarn
+
+### Install Ruby, Rails and the required gems
 
     bundle install
-
-### Javascript
-
-    yarn install
-
-### System
 
 ## Database Management
 
@@ -41,28 +28,33 @@ To run migrations use the following command:
 
     bundle exec rails db:migrate
 
-## Services (job queues, cache servers, search engines, etc.)
+## Jobs
+
+To get Sidekiq up and running use the following:
+
+    sidekiq
 
 ## Tests
 
-You should run the tests with the following command:
+You should run the tests with one of the following commands:
 
     bundle exec rake
 
-## Linting
+or:
 
-You can lint the code running Rubocop:
+    rspec
 
-    bundle exec rubocop
+## About how URLs are shortened
 
-## Security
+To generate the shortened URL base 36 encoding is used from the url id record that is stored in the database
+after the url is saved. This type of enconding can convert strings with a big amount of characters into fewer
+characters.
 
-Run:
+More detailed information can be found in the following link:
 
-    bundle exec brakeman
+https://en.wikipedia.org/wiki/Base36
 
-## Deployment Instructions
+## Live project
 
-## How to Contribute
+Project is up and running at: https://shorturl2020.herokuapp.com
 
-## License
