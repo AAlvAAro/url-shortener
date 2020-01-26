@@ -10,6 +10,7 @@ gem "pg", ">= 0.18", "< 2.0"
 
 gem "bootsnap", ">= 1.4.4", require: false
 gem "haml-rails"
+gem "httparty"
 gem "image_processing", "~> 1.2"
 gem "interactor-rails"
 gem "puma", "~> 4.1"

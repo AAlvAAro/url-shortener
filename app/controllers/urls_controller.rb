@@ -20,8 +20,9 @@ class UrlsController < ApplicationController
   def create
     url = Url.find_or_create_by(original: url_params[:original]) do |url|
       url.slug = 'abcde'
-      url.title = 'Google'
     end
+
+    UrlInspectorJob.perform_later(url.slug)
 
     flash[:notice] = 'Your shortened URL has been created'
     redirect_to urls_path(slug: url.slug)
