@@ -22,12 +22,6 @@ or:
     bundle exec rails db:migrate
     bundle exec rails db:seed
 
-### Running migrations
-
-To run migrations use the following command:
-
-    bundle exec rails db:migrate
-
 ## Jobs
 
 To get Sidekiq up and running use the following:
