@@ -1,20 +1,23 @@
-%h1 Shorten your URL here
+%h3 Shorten your URL here
 
 = form_for Url.new, method: :post do |f|
-  = f.text_field :original
-  %p
-    = f.submit 'Create URL'
+  .form-group
+    = f.text_field :original, class: 'form-control'
+  .form-group
+    = f.submit 'Create URL', class: 'btn btn-success'
 
   - if @slug.present?
-    %p Your shortened url is:
-    %b= full_url(@slug)
-
+    %h5 Your shortened url is:
+    = link_to full_url(@slug)
+%br/
+%hr/
 - if @urls.any?
-  %h3 Our most visited URLs are:
+  %h4 Our 100 most visited URLs are:
 
-  %table
+  %table.table.table-bordered.table-striped
     %tr
       %th Page Title
+      %th Original URL
       %th Short URL
       %th Visits
     - @urls.each do |url|

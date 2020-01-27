@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Url Shortener
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %nav.navbar.navbar-default
+      .container-fluid
+        .navbar-header
+          %button.navbar-toggle.collapsed{ type: 'button', 'data-toggle': 'collapse',
+                                           'data-target': '#navigation', 'aria-expanded': false }
+            %span.sr-only Open Navigation
+          = link_to 'Url Shortener', root_path, class: 'navbar-brand'
+
+    .container-fluid
+      - if notice
+        .alert.alert-success.alert-dismissible= notice
+      - if alert
+        .alert.alert-danger.alert-dismissible= alert
+
+      .col-lg-8.col-lg-offset-2
+        = yield

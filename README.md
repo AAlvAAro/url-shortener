@@ -4,7 +4,6 @@
 
 - Ruby 2.5.7
 - Rails 6.0.0
-- Yarn
 
 ### Install Ruby, Rails and the required gems
 
