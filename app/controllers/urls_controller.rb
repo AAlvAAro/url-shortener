@@ -19,12 +19,18 @@ class UrlsController < ApplicationController
 
   def create
     url = Url.find_or_create_by(original: url_params[:original])
-    generate_slug(url) unless url.slug.present?
 
-    UrlInspectorJob.perform_now(url.slug)
+    if url.valid?
+      generate_slug(url) unless url.slug.present?
 
-    flash[:notice] = 'Your shortened URL has been created'
-    redirect_to root_path(slug: url.slug)
+      UrlInspectorJob.perform_now(url.slug)
+
+      flash[:notice] = 'Your shortened URL has been created'
+      redirect_to root_path(slug: url.slug)
+    else
+      flash[:alert] = 'The URL you are trying to convert is not valid. Try with an http or https URL'
+      redirect_to root_path
+    end
   end
 
   private

@@ -25,10 +25,16 @@ RSpec.describe UrlsController, type: :controller do
   describe 'POST #create' do
     before { allow_any_instance_of(UrlInspectorJob).to receive(:perform) { true } }
 
-    it 'returns http success' do
+    it 'return success with a valid URL' do
       post :create, params: { url: { original: 'http://google.com' } }
 
       expect(flash[:notice]).to eq('Your shortened URL has been created')
+    end
+
+    it 'return error with a valid URL' do
+      post :create, params: { url: { original: 'this is not a url' } }
+
+      expect(flash[:alert]).to eq('The URL you are trying to convert is not valid. Try with an http or https URL')
     end
   end
 end
