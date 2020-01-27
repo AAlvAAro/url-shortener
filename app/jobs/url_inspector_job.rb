@@ -5,9 +5,13 @@ class UrlInspectorJob < ApplicationJob
 
   def perform(slug)
     url = Url.find_by(slug: slug)
-    response = HTTParty.get(url.original)
-    html = Nokogiri::HTML::Document.parse(response.body)
+    begin
+      response = HTTParty.get(url.original)
+      html = Nokogiri::HTML::Document.parse(response.body)
 
-    url.update(title: html.title)
+      url.update(title: html.title)
+    rescue
+      url.update(title: 'Page Not Found')
+    end
   end
 end
